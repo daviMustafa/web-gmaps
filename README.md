@@ -1,4 +1,4 @@
-Web GMaps Servlets Project
+GMaps Web Service Project
 ======================
 
 Uma aplicação feita para estudo visando aprender como funciona a API do GoogleMaps.
@@ -26,9 +26,9 @@ Informação adicional
 
 Tecnologias Usadas
 ==============
-1. Servlets 3.0
+1. Serviços REST
 2. Hibernate 4.x
 3. Spring 4.x
 4. Bootstrap (para testes de responsividade do site)
 5. AJAX
-6. Serviços REST
+
