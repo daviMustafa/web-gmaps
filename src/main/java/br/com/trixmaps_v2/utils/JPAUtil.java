@@ -7,7 +7,7 @@ import javax.persistence.Persistence;
 public class JPAUtil {
 	
 	private static EntityManagerFactory factory = Persistence
-			.createEntityManagerFactory("trixmaps");
+			.createEntityManagerFactory("trixmaps_v2");
 
 	public EntityManager getEntityManager() {
 		return factory.createEntityManager();

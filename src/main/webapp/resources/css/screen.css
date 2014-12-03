@@ -1,0 +1,108 @@
+* {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #333333;
+}
+
+html,body {
+	margin: 0px;
+	padding: 0px;
+}
+
+.noBorderPanelGrid td,.noBorderPanelGrid tr,.noBorderPanelGrid tr td {
+	border: none;
+	border-color: none !important;
+	border-style: none !important;
+	border-width: 0px !important;
+	background: none !important;
+}
+
+.noBorderPanelGrid td {
+	padding: 2px 10px;
+}
+
+.menuTopo {
+	background-color: #f2f5f7;
+	height: 32px;
+	display: block;
+	width: 100%;
+}
+
+.containerScreen {
+	margin-top: 20px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#logoArea {
+	width: 100px;
+	height: 40px;
+	display: inline-block;
+	position: absolute;
+	margin-left: 10px;
+	background: white;
+	border-left: 1px solid #aed0ea;
+	border-right: 1px solid #aed0ea;
+	border-bottom: 1px solid #aed0ea;
+}
+
+#logoArea  img {
+	height: 38px;
+	width: 90px;
+	margin: 2px auto;
+	display: block;
+}
+
+.botaoNovoNaLista {
+	margin-top: 5px;
+}
+
+.formNovoNaLista {
+	display: inline-block;
+	float: right;
+	margin-top: 5px;
+	margin: 0;
+}
+
+.columnAcoes {
+	text-align: center;
+}
+
+.columnAcoes button {
+	margin: 0 1px 0 1px;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.usuarioFormClass label {
+	width: 100px;
+	display: block;
+}
+
+.infoIcon {
+	margin: 0px;
+	margin-left: 2px;
+}
+
+.fieldHelp {
+	float: right;
+	padding: 4px 6px 4px 6px;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+#formMinhaConta input {
+	width: 300px;
+}
+
+#formDialogAlterarSenha input {
+	width: 250px;
+}
+
+.column {
+	width: 110px;
+}

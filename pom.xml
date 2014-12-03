@@ -149,6 +149,13 @@
 			<version>1.1.1</version>
 		</dependency>
 
+		<!-- GOOGLE GSON -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+
 		<!-- Apache Commons Dependencies -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -171,7 +178,7 @@
 			<version>1.5</version>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<plugins>
 			<!-- Compiler plugin enforces Java 1.8 compatiblity -->
