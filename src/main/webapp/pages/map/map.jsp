@@ -53,8 +53,8 @@ html, body, #map-canvas {
 	google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 	<div id="panel" style="margin-top: 80px">
-		<input id="address" type="textbox" value="Sydney, NSW"> <input
-			type="button" value="Geocode" onclick="codeAddress()">
+		<input id="address" type="textbox" value="Sydney, NSW"> 
+		<input type="button" value="Geocode" onclick="codeAddress()">
 	</div>
-	<div id="map-canvas" style="margin-top: 120px"></div>
+	<div id="map-canvas" style="height: 500px;margin-top: 120px"></div>
 </html>

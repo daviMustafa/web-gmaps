@@ -15,6 +15,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import br.com.trixmaps_v2.model.Location;
 import br.com.trixmaps_v2.service.LocationService;
+import br.com.trixmaps_v2.service.TagService;
 
 @WebServlet("/locationController")
 public class LocationController extends HttpServlet {
@@ -25,6 +26,7 @@ public class LocationController extends HttpServlet {
 	
 	private Location location;
 	private LocationService locationService;
+	private TagService tagService;
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -35,7 +37,7 @@ public class LocationController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
-		String action = request.getParameter("acao"); 
+		String action = request.getParameter("action"); 
 		location = new Location();
 		
 		if(ctx == null){
@@ -43,6 +45,8 @@ public class LocationController extends HttpServlet {
 		}
 		
 		locationService = ctx.getBean(LocationService.class);
+		tagService = ctx.getBean(TagService.class);
+		
 		
 		if("save".equalsIgnoreCase(action)){
 			
@@ -82,6 +86,7 @@ public class LocationController extends HttpServlet {
 			
 		}
 		
+		request.setAttribute("tags", tagService.list());
 		request.setAttribute("locations", locationService.list());
 		RequestDispatcher rd = request.getRequestDispatcher("index.jsp?page=/pages/location/create.jsp");
 		rd.forward(request, response);
@@ -91,10 +96,18 @@ public class LocationController extends HttpServlet {
 	public Location getLocation() {
 		return location;
 	}
+	
 	public void setLocation(Location location) {
 		this.location = location;
 	}
+	
 	public void setLocationService(LocationService locationService) {
 		this.locationService = locationService;
 	}
+
+	public void setTagService(TagService tagService) {
+		this.tagService = tagService;
+	}
+	
+	
 }

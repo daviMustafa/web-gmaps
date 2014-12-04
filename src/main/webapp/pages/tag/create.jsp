@@ -46,18 +46,16 @@
 		<input type="hidden" value="" name="id" id="id"/>
 			
 		<c:if test="${not empty tags }">
-			<table border="2" style="margin: 0px auto; margin-top: 50px">
-				<tr>
+			<table  style="margin: 0px auto; margin-top: 50px">
+				<thead>
 					<td style="width: 200px; text-align: center">ID</td>
 					<td style="width: 200px; text-align: center">Name</td>
 					<td style="width: 200px; text-align: center">Created</td>
 					<td style="width: 200px; text-align: center">Delete</td>
-				</tr>
+				</thead>
 				<c:forEach var="tag" items="${tags}">
 					<tr>
-						<td style="text-align: center">
-							<c:out value="${tag.id}"/>
-						</td>
+						<td style="text-align: center"><c:out value="${tag.id}"/></td>
 						<td style="text-align: center"><c:out value="${tag.name}" /></td>
 						<td style="text-align: center"><c:out value="${tag.created}" /></td>
 						<td style="text-align: center">
@@ -70,7 +68,6 @@
 				</c:forEach>
 			</table>
 		</c:if>
-		<input type="hidden" name="action" value="delete"/>
 	</form>
 </div>
 </html>

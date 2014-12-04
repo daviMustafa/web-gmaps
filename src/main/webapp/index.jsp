@@ -13,6 +13,8 @@
 	type="text/css" />
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/jquery-ui.min.css" type="text/css" />
+<link rel="stylesheet"
+	href="${contextPath}/resources/css/table.css" type="text/css" />	
 
 <script src="http://code.jquery.com/jquery-latest.min.js"
 	type="text/javascript"></script>
@@ -53,7 +55,7 @@
 
 		<c:set scope="application" var="pages" value="${param.page}" />
 
-		<div class="container" style="text-align: center; margin: 0px auto">
+		<div class="container" style="text-align: center; margin: 0px auto; height: 100%">
 
 			<c:if test="${ not empty msg}">
 				<div class="ui-widget vanish">
