@@ -1,12 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
 
-</body>
+<script src="${contextPath}/resources/js/dialog_box_addTag.js"></script>
+
+
+<div style="text-align: center">
+	
+	<h3>Create new Location</h3>
+	</br>
+	<form action="createLocation" method="get">
+		
+		<label>Name: </label>
+		<input type="text" name="name"/>
+		<label>Latitude: </label>
+		<input type="text" name="latitude">
+		<label>Longitude: </label>
+		<input type="text" name="longitude">
+		<label>Select tags: </label>
+		<input type="checkbox">
+			
+			
+		<input type="submit" value="Save"/>
+	
+	
+	</form>
+	
+</div>
+
 </html>

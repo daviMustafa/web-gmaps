@@ -1,5 +1,7 @@
 <html>
 <body>
-	<label>Bem vindo ao TrixMaps</label>
+	<div style="margin-top: 300px">
+
+	</div>
 </body>
 </html>
