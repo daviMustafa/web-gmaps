@@ -13,8 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.trixmaps_v2.model.Location;
 
 
-@Repository("locationDao")
-@Transactional
+@Repository
 public class LocationDaoImpl implements LocationDao, Serializable{
 	
 	private static final long serialVersionUID = 3698621543099996350L;

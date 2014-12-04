@@ -27,14 +27,36 @@
 </script>
 <div style="text-align: center">
 
-	<h3>Create new Tag</h3>
+	<h3>Tags Manager</h3>
 	</br>
-	<form id="form_tag" action="tagController" method="get">
+	<form id="form_tag" action="tagController" method="post">
 		<label>Name: </label> 
-		<input type="text" name="name" /></br>
-		<input type="hidden" value="save" name="acao" /> 
+		<input type="text" name="name" /></br><label for="name" style="color: red"></label>
+		<input type="hidden" value="save" name="action" /> 
 		<input type="submit" value="Save" /> 
 		<input type="reset" value="Reset" />
+	</br>
+	
+		
+	<c:if test="${tags ne null }">
+		<table border="2" style="margin: 0px auto;margin-top: 50px">
+			<tr>
+				<td style="width: 200px; text-align: center">ID</td>
+				<td style="width: 200px; text-align: center">Name</td>
+				<td style="width: 200px; text-align: center">Delete</td>
+			</tr>
+				<c:forEach var="tag" items="${tags}">
+					<tr>
+						<td style="text-align: center"><c:out value="${tag.id}" /></td>
+						<td style="text-align: center"><c:out value="${tag.name}" /></td>
+						<td style="text-align: center">
+							<a href="/TagController?action=delete&id=${tag.id}" title="Delete"></a>
+						</td>
+					</tr>
+				</c:forEach>
+		</table>
+	</c:if>
+		
 	</form>
 </div>
 </html>

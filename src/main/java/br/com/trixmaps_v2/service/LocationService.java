@@ -35,4 +35,8 @@ public class LocationService {
 	public void delete(Location location){
 		locationDao.remove(location);
 	}
+	
+	public void listById(Integer id){
+		locationDao.searchById(id);
+	}
 }

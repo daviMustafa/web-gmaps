@@ -15,9 +15,9 @@
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <script src="${contextPath}/resources/js/jquery-2.1.1.js" type="text/javascript"></script>
 <script src="${contextPath}/resources/js/jquery-ui.js" type="text/javascript"></script>
-<script src="${contextPath}/resources/js/jquery.validade.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/js/jquery.validate.min.js" type="text/javascript"></script>
 
-<script src="${contextPath}/resources/js/script.js"></script>
+<script src="${contextPath}/resources/js/menu.js"></script>
 
 <title>Index Trixmaps_V2</title>
 </head>
@@ -29,28 +29,30 @@
 				<li class='has-sub'><a href='#'><span>Location</span></a>
 					<ul>
 						<li><a
-							href='${contextPath}/index.jsp?page=/pages/location/create.jsp'><span>Create</span></a></li>
-						<li class='last'><a
-							href='${contextPath}/index.jsp?page=/pages/location/list.jsp'><span>List</span></a></li>
-					</ul></li>
+							href='${contextPath}/index.jsp?page=/pages/location/create.jsp'><span>Manage Locations</span></a></li>
+<!-- 						<li class='last'><a -->
+<%-- 							href='${contextPath}/index.jsp?page=/pages/location/list.jsp'><span>List</span></a></li> --%>
+					</ul>
+				</li>
 				<li class='has-sub'><a href='#'><span>Tag</span></a>
 					<ul>
 						<li><a
-							href='${contextPath}/index.jsp?page=/pages/tag/create.jsp'><span>Create</span></a></li>
-						<li class='last'><a
-							href='${contextPath}/index.jsp?page=/pages/tag/list.jsp'><span>List</span></a></li>
-					</ul></li>
+							href='${contextPath}/index.jsp?page=/pages/tag/create.jsp'><span>Manage Tags</span></a></li>
+<!-- 						<li class='last'><a -->
+<%-- 							href='${contextPath}/index.jsp?page=/pages/tag/list.jsp'><span>List</span></a></li> --%>
+					</ul>
+				</li>
 				<li class='has-sub'><a href='#'><span>GMaps</span></a>
 					<ul>
 						<li><a
-							href='${contextPath}/index.jsp?page=/pages/maps/maps.html'><span>Find Location</span></a></li>
+							href='${contextPath}/index.jsp?page=/pages/map/map.jsp'><span>Find Location</span></a></li>
 					</ul></li>
 			</ul>
 		</div>
 
 		<c:set scope="application" var="pages" value="${param.page}" />
 
-		<div class="container" style="text-align: center;">
+		<div class="container" style="text-align: center; margin: 0px auto">
 			<c:choose>
 				<c:when test="${not empty pages}">
 					<jsp:include page="${pages}" flush="true" />

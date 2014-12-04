@@ -134,6 +134,13 @@
 			<artifactId>javax.servlet.jsp.jstl-api</artifactId>
 			<version>1.2.1</version>
 		</dependency>
+		
+		<!-- DISPLAY TAG -->
+		<dependency>
+			<groupId>displaytag</groupId>
+			<artifactId>displaytag</artifactId>
+			<version>1.2</version>
+		</dependency>
 
 		<!-- JERSEY -->
 		<dependency>
