@@ -1,7 +1,9 @@
 package br.com.trixmaps_v2.web;
 
 import java.io.IOException;
+import java.util.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,6 +27,12 @@ public class LocationController extends HttpServlet {
 	private LocationService locationService;
 	
 	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
+	
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
 		String action = request.getParameter("acao"); 
@@ -37,16 +45,46 @@ public class LocationController extends HttpServlet {
 		locationService = ctx.getBean(LocationService.class);
 		
 		if("save".equalsIgnoreCase(action)){
+			
 			String name = request.getParameter("name");
 			String latitude = request.getParameter("latitude");
 			String longitude = request.getParameter("longitude");
 			
 			
+			location.setName(name);
+			location.setLatitude(Double.parseDouble(latitude));
+			location.setLongitude(Double.parseDouble(longitude));
+			location.setCreated(new Date());
+			
+			try{
+				locationService.create(location);
+				request.setAttribute("msg", "Location successfully added.");
+			} catch (Exception e){
+				e.printStackTrace();
+				request.setAttribute("errorMsg", "Error trying to add location.");
+			}
+			
 		} else if ("delete".equalsIgnoreCase(action)){
+			
+			String id = request.getParameter("id");
+			
+			location.setId(Long.parseLong(id));
+			
+			try{
+				locationService.delete(location);
+				request.setAttribute("msg", "Location successfully deleted.");
+			} catch (Exception e){
+				e.printStackTrace();
+				request.setAttribute("errorMsg", "Error trying to delete location.");
+			}
 			
 		} else if ("edit".equalsIgnoreCase(action)){
 			
 		}
+		
+		request.setAttribute("locations", locationService.list());
+		RequestDispatcher rd = request.getRequestDispatcher("index.jsp?page=/pages/location/create.jsp");
+		rd.forward(request, response);
 		
 	}
 	

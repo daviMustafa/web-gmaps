@@ -26,6 +26,13 @@ public class TagController extends HttpServlet {
 	private Tag tag;
 	private TagService tagService;
 	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException{
+		doPost(request, response);
+	}
+	
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
 		String action = request.getParameter("action");
@@ -46,6 +53,7 @@ public class TagController extends HttpServlet {
 				tagService.create(tag);
 				request.setAttribute("msg", "Tag successfully added.");
 			}catch(Exception e){
+				e.printStackTrace();
 				request.setAttribute("errorsMsg", "Error trying to add tag.");
 			}
 			
@@ -58,8 +66,10 @@ public class TagController extends HttpServlet {
 				tagService.delete(tag);
 				request.setAttribute("msg", "Tag successfully deleted.");
 			} catch(Exception e){
-				request.setAttribute("errorsMsg", "Error trying to delete.");
+				e.printStackTrace();
+				request.setAttribute("errorMsg", "Error trying to delete tag.");
 			}
+			
 		}
 		
 		request.setAttribute("tags", tagService.list());
