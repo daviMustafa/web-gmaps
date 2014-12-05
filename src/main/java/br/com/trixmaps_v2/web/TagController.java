@@ -35,46 +35,60 @@ public class TagController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
-		String action = request.getParameter("action");
-		tag = new Tag();
-		
+		// Carregando contexto Spring		
 		if(ctx == null){
 			ctx = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
 		}
 		
 		tagService = ctx.getBean(TagService.class);
+		String action = request.getParameter("action");
 		
-		if("save".equalsIgnoreCase(action)){
-			String name = request.getParameter("name");
-		
-			tag.setName(name);
-			tag.setCreated(new Date());
-			try{
-				tagService.create(tag);
-				request.setAttribute("msg", "Tag successfully added.");
-			}catch(Exception e){
-				e.printStackTrace();
-				request.setAttribute("errorsMsg", "Error trying to add tag.");
+		if("".equalsIgnoreCase(action) || action != null){
+			if("create".equalsIgnoreCase(action)){
+				
+				String name = request.getParameter("name");
+				addTag(name, request);
+			
+			} else if ("delete".equalsIgnoreCase(action)){
+				
+				String id = request.getParameter("id");
+				deleteTag(id, request);
 			}
-			
-		} else if ("delete".equalsIgnoreCase(action)){
-			
-			String id = request.getParameter("id");
-			
-			tag.setId(Long.parseLong(id));
-			try{
-				tagService.delete(tag);
-				request.setAttribute("msg", "Tag successfully deleted.");
-			} catch(Exception e){
-				e.printStackTrace();
-				request.setAttribute("errorMsg", "Error trying to delete tag.");
-			}
-			
-		}
+		}	
 		
 		request.setAttribute("tags", tagService.list());
 		RequestDispatcher rd = request.getRequestDispatcher("index.jsp?page=/pages/tag/create.jsp");
 		rd.forward(request, response);
+	}
+	
+	public void addTag(String name, HttpServletRequest request){
+		
+		tag = new Tag();
+		
+		tag.setName(name);
+		tag.setCreated(new Date());
+		
+		try{
+			tagService.create(tag);
+			request.setAttribute("msg", "Tag successfully added.");
+		}catch(Exception e){
+			e.printStackTrace();
+			request.setAttribute("errorMsg", "Error trying to add tag.");
+		}
+	}
+	
+	public void deleteTag(String id, HttpServletRequest request){
+		tag = new Tag();
+		
+		tag.setId(Long.parseLong(id));
+		
+		try{
+			tagService.delete(tag);
+			request.setAttribute("msg", "Tag successfully deleted.");
+		} catch(Exception e){
+			e.printStackTrace();
+			request.setAttribute("errorMsg", "Error trying to delete tag.");
+		}
 	}
 	
 	public void setTagService(TagService tagService) {

@@ -1,4 +1,4 @@
-package br.com.trixmaps_v2.dao;
+package br.com.trixmaps_v2.dao.impl;
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.trixmaps_v2.dao.TagDao;
 import br.com.trixmaps_v2.model.Tag;
 
 @Repository

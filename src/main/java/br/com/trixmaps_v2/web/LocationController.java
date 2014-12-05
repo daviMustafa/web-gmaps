@@ -68,7 +68,7 @@ public class LocationController extends HttpServlet {
 				request.setAttribute("errorMsg", "Error trying to add location.");
 			}
 			
-		} else if ("delete".equalsIgnoreCase(action)){
+		} else if ("del".equalsIgnoreCase(action)){
 			
 			String id = request.getParameter("id");
 			

@@ -7,6 +7,8 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
+<link rel="shortcut icon" href="resources/img/favicon.png" type="image/png" />
+
 <link rel="stylesheet" href="${contextPath}/resources/css/styles.css"
 	type="text/css" />
 <link rel="stylesheet" href="${contextPath}/resources/css/bootstrap.css"
@@ -91,7 +93,7 @@
 			</c:choose>
 		</div>
 
-		<div style="text-align: center; margin-top: 400px">
+		<div style="text-align: center; margin-top: 700px">
 			<c:import url="footer.jsp" />
 		</div>
 </body>

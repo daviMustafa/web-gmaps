@@ -36,8 +36,8 @@ public class TagService {
 	}
 	
 	@Transactional
-	public void listById(Integer id){
-		tagDao.searchById(id);
+	public Tag listById(Integer id){
+		return tagDao.searchById(id);
 	}
 	
 }

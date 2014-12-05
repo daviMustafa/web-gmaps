@@ -86,7 +86,7 @@ h3{
 
 #tableList thead {
   cursor: pointer;
-  background: #c9dff0;
+  background: #c6d2f4;
 }
 #tableList thead tr th { 
   font-weight: bold;
@@ -103,21 +103,12 @@ h3{
   background: #acc8dd;
 }
 
-#tableList thead tr th.headerSortUp span {
-  background-image: url('http://i.imgur.com/SP99ZPJ.png');
-}
-#tableList thead tr th.headerSortDown span {
-  background-image: url('http://i.imgur.com/RkA9MBo.png');
-}
-
 #tableList tbody tr { 
   color: #555;
 }
-#tableList tbody tr td {
+#tableList table tbody tr td {
   text-align: center;
   padding: 15px 10px;
-  border-style: inset;
-}
-#tableList tbody tr td.lalign {
-  text-align: left;
+  margin: 0px auto;
+  margin-top: 50px
 }

@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <script src="${contextPath}/resources/js/dialog_box_addTag.js"></script>
 
@@ -50,8 +51,9 @@
 		});
 
 	});
-	function submitId(id){
+	function submitId(id, action){
 		$("#id").val(id);
+		$("#action").val(action);
 		$("#form_location_list").submit();
 	}
 </script>
@@ -77,8 +79,8 @@
 						<label>Latitude: </label>
 					</td>	
 					<td>
-						<input type="text" name="latitude"></br>
-					</td>
+						<input type="text" name="latitude">
+					</td></br>
 				</tr>
 				
 				<tr>
@@ -115,18 +117,19 @@
 	<hr width="85%" align="center" style="border-style: inset; border-width: 1px">
 		<form id="form_location_list" action="locationController" method="post">
 			<input type="hidden" value="" name="id" id="id"/>
+			<input type="hidden" value="" name="action" id="action"/>
 			
 			<c:if test="${not empty locations }">
-				<table style="margin: 0px auto; margin-top: 50px">
+				<table id="tableList">
 					<thead style="background-color: ">
-						<td style="width: 200px; text-align: center">ID</td>
+						<td style="width: 40px; text-align: center">ID</td>
 						<td style="width: 200px; text-align: center">Name</td>
-						<td style="width: 200px; text-align: center">Latitude</td>
-						<td style="width: 200px; text-align: center">Longitude</td>
+						<td style="width: 100px; text-align: center">Latitude</td>
+						<td style="width: 100px; text-align: center">Longitude</td>
 						<td style="width: 200px; text-align: center">Tags</td>
-						<td style="width: 200px; text-align: center">Created</td>
-						<td style="width: 200px; text-align: center">Delete</td>
-						<td style="width: 200px; text-align: center">Edit</td>
+						<td style="width: 100px; text-align: center">Created</td>
+						<td style="width: 40px; text-align: center">Delete</td>
+						<td style="width: 40px; text-align: center">Edit</td>
 					</thead>
 					<c:forEach var="location" items="${locations}">
 							<tr>
@@ -143,13 +146,17 @@
 									</c:forEach>
 								</td>
 								
-								<td style="text-align: center"><c:out value="${location.created}" /></td>
+								<td style="text-align: center"><fmt:formatDate value="${location.created}" pattern="dd/MM/yyyy"/> </td>
 								
 								<td style="text-align: center">
-									<button value="delete" name="action" type="button" onclick="submitId(${location.id})">Delete</button>
+									<button title="Delete" id="del" value="del" type="button" onclick="submitId(${location.id}, document.getElementById('del').value);">
+										<img src="resources/img/delete.png" width="15px" height="15px"/>
+									</button>
 								</td>
 								<td style="text-align: center">
-									<button value="edit" type="button" name="action" onclick="submitId(${location.id})">Edit</button>
+									<button title="Edit" id="edit" value="edit" type="button" onclick="submitId(${location.id}, document.getElementById('edit').value);">
+										<img src="resources/img/edit.png" width="15px" height="15px"
+									</button>
 								</td>
 							</tr>
 					</c:forEach>
