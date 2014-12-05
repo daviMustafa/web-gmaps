@@ -8,7 +8,7 @@ public interface LocationDao {
 	
 	public void insert(Location location);
 	
-	public Location searchById(Integer id);
+	public Location searchById(Long id);
 	
 	public List<Location> listAll();
 	

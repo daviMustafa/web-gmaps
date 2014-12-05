@@ -34,7 +34,7 @@ public class LocationDaoImpl implements LocationDao, Serializable{
 	}
 	
 	@Transactional(readOnly=true)
-	public Location searchById(Integer id){
+	public Location searchById(Long id){
 		return this.manager.find(Location.class, id);
 	}
 	

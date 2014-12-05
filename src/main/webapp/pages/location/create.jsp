@@ -19,13 +19,11 @@
 				latitude : {
 					required: true,
 					number: true,
-					digits: true,
 					minlenght: 0
 				},
 				longitude: {
 					required: true,
 					number: true,
-					digits: true,
 					minlenght: 0
 				}
 
@@ -61,16 +59,24 @@
 	
 	<h3>Locations Manager</h3>
 	</br>
-	<table style="margin: 0 auto">
-		<form id="form_location" action="locationController" method="post">
-		
+	<form id="form_location" action="locationController" method="post">
+		<table style="margin: 0 auto">
 			<tbody style="width: 100%">
 				<tr width="100%">
 					<td>
 						<label>Name: </label>
 					</td>
 					<td>	
-						<input type="text" name="name"/>
+					<c:choose>
+						<c:when test="${location.id ne null}">
+							<input type="hidden" id="locationId" name="locationId" value="${location.id}"/>
+							<input type="text" name="name" value="${location.name}"/>
+						</c:when>
+						<c:otherwise>
+							<input type="text" name="name"/>
+						</c:otherwise>
+					</c:choose>
+						
 					</td></br>	
 				</tr>
 				
@@ -79,7 +85,14 @@
 						<label>Latitude: </label>
 					</td>	
 					<td>
-						<input type="text" name="latitude">
+					<c:choose>
+						<c:when test="${location.id ne null}">
+							<input type="text" name="latitude" value="${location.latitude}"/>
+						</c:when>
+						<c:otherwise>
+							<input type="text" name="latitude"/>
+						</c:otherwise>
+					</c:choose>
 					</td></br>
 				</tr>
 				
@@ -88,18 +101,26 @@
 						<label>Longitude: </label>
 					</td>
 					<td>	
-						<input type="text" name="longitude">
+						<c:choose>
+						<c:when test="${location.id ne null}">
+							<input type="text" name="longitude" value="${location.longitude}"/>
+						</c:when>
+						<c:otherwise>
+							<input type="text" name="longitude"/>
+						</c:otherwise>
+					</c:choose>
 					</td></br>
 				</tr>		
 				
 				<tr>
 					<td>
-						<label>Select tags: </label>
+						<label>Associate Tags: </label>
 					</td>
 					<td>	
-						<c:forEach var="tag" items="${tags}">
+						<%-- <c:forEach var="tag" items="${tags}">
 							<input type="checkbox">${tag.name}</br>
-						</c:forEach>
+						</c:forEach> --%>
+						<button id="showBoxAddTag" value="">Add Tags</button>
 					</td>	
 				</tr>		
 				<tr>
@@ -107,12 +128,24 @@
 						<span></span>
 					</td>
 					<td colspan="2" align="right">
-						<input type="submit" value="Save"/>
+					<c:choose>
+						<c:when test="${location.id ne null}">
+							<input type="submit" value="Update"/>
+							<input type="hidden" name="action" value="update"/>
+						</c:when>
+						<c:otherwise>
+							<input type="submit" value="Save"/>
+							<input type="hidden" name="action" value="create"/>
+						</c:otherwise>
+					</c:choose>
 					</td>
 				</tr>		
-			</tbody>	
-		</form>
-	</table>		
+			</tbody>
+		</table>
+		<div id="locTag">
+				
+		</div>			
+	</form>
 		
 	<hr width="85%" align="center" style="border-style: inset; border-width: 1px">
 		<form id="form_location_list" action="locationController" method="post">

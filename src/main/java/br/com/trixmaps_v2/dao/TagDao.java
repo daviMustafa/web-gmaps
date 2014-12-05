@@ -8,7 +8,7 @@ public interface TagDao {
 	
 	public void insert(Tag tag);
 	
-	public Tag searchById(Integer id);
+	public Tag searchById(Long id);
 	
 	public List<Tag> listAll();
 	

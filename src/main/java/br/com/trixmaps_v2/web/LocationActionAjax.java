@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,29 +13,48 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import br.com.trixmaps_v2.model.Location;
 import br.com.trixmaps_v2.model.Tag;
 import br.com.trixmaps_v2.service.LocationService;
 import br.com.trixmaps_v2.service.TagService;
 
+@WebServlet("/locationActionAjax")
 public class LocationActionAjax extends HttpServlet {
 
 	private static final long serialVersionUID = -7174101257872838549L;
+	
+	private ApplicationContext ctx = null; 
 	
 	private TagService tagService;
 	
 	private LocationService locationService;
 	
 	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		doPost(req, resp);
+	}
+
+	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
 		String method = request.getParameter("method");
 		
+		// Carregando contexto Spring		
+		if(ctx == null){
+			ctx = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
+		}
+				
+		tagService = ctx.getBean(TagService.class);
+		locationService = ctx.getBean(LocationService.class);
+		
 		if(method != null){
 			
 			switch(method.toLowerCase()){
-			case "loadTags":{
+			case "loadtags":{
 				loadTags(request, response);
 				break;
 			}
@@ -46,13 +66,11 @@ public class LocationActionAjax extends HttpServlet {
 		JSONObject rt = null;
 		
 		try(PrintWriter out = response.getWriter();){
-			final String location = request.getParameter("location");
 			
-			if(location != null){
 				rt = new JSONObject();
 				
 				JSONArray all = loadAll(request, response);
-				rt.put("all", all);
+				rt.put("allTags", all);
 				
 				JSONArray locationTags = loadLocationTags(request, response);
 				rt.put("locationTags", locationTags);
@@ -61,7 +79,7 @@ public class LocationActionAjax extends HttpServlet {
 				
 				out.write(rt.toString());
 				out.flush();
-			}
+				
 		} catch (JSONException e){
 			e.printStackTrace();
 		} catch(IOException e){
@@ -104,25 +122,37 @@ public class LocationActionAjax extends HttpServlet {
 		
 		JSONArray jsn = null;
 		
-		try{
-			List<Location> locationTags = locationService.list();
-			JSONObject obj = null;
-			jsn = new JSONArray();
-			
-			for(Location l : locationTags){
-				obj = new JSONObject();
-				obj.put("locationTags", l.getTags());
-				jsn.put(obj);
+		String locationId = request.getParameter("locationId");
+		
+		if(locationId != null){
+			try{
+				Location location = locationService.listById(Long.parseLong(locationId));
+				JSONObject obj = null;
+				jsn = new JSONArray();
+				
+				List<Tag> locationTags = location.getTags();
+				
+				for(Tag t : locationTags){
+					obj = new JSONObject();
+					obj.put("locationTags", t);
+					obj.put("id", t.getId());
+					obj.put("name", t.getName());
+					jsn.put(obj);
+				}
+			} catch(Exception e){
+				e.printStackTrace();
 			}
-		} catch(Exception e){
-			e.printStackTrace();
 		}
 		
 		return jsn;
 	}
-	
-	
-	
+	public void setTagService(TagService tagService) {
+		this.tagService = tagService;
+	}
+
+	public void setLocationService(LocationService locationService) {
+		this.locationService = locationService;
+	}
 	
 	
 }

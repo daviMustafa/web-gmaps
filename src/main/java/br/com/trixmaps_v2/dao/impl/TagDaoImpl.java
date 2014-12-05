@@ -32,7 +32,7 @@ public class TagDaoImpl implements TagDao, Serializable{
 	}
 	
 	@Transactional(readOnly=true)
-	public Tag searchById(Integer id){
+	public Tag searchById(Long id){
 		return this.manager.find(Tag.class, id);
 	}
 	

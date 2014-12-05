@@ -36,7 +36,8 @@ public class LocationService {
 		locationDao.remove(location);
 	}
 	
-	public void listById(Integer id){
-		locationDao.searchById(id);
+	@Transactional
+	public Location listById(Long id){
+		return locationDao.searchById(id);
 	}
 }

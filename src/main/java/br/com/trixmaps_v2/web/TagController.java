@@ -35,13 +35,9 @@ public class TagController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
-		// Carregando contexto Spring		
-		if(ctx == null){
-			ctx = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
-		}
-		
-		tagService = ctx.getBean(TagService.class);
 		String action = request.getParameter("action");
+		
+		loadApplicationContext();
 		
 		if("".equalsIgnoreCase(action) || action != null){
 			if("create".equalsIgnoreCase(action)){
@@ -89,6 +85,15 @@ public class TagController extends HttpServlet {
 			e.printStackTrace();
 			request.setAttribute("errorMsg", "Error trying to delete tag.");
 		}
+	}
+	
+	public void loadApplicationContext(){
+		// Carregando contexto Spring		
+		if(ctx == null){
+			ctx = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
+		}
+			
+		tagService = ctx.getBean(TagService.class);
 	}
 	
 	public void setTagService(TagService tagService) {
