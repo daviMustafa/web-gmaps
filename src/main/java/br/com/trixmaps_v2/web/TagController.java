@@ -59,8 +59,6 @@ public class TagController extends HttpServlet {
 	
 	public void addTag(String name, HttpServletRequest request){
 		
-		tag = new Tag();
-		
 		tag.setName(name);
 		tag.setCreated(new Date());
 		
@@ -74,7 +72,6 @@ public class TagController extends HttpServlet {
 	}
 	
 	public void deleteTag(String id, HttpServletRequest request){
-		tag = new Tag();
 		
 		tag.setId(Long.parseLong(id));
 		
@@ -94,6 +91,7 @@ public class TagController extends HttpServlet {
 		}
 			
 		tagService = ctx.getBean(TagService.class);
+		tag = ctx.getBean(Tag.class);
 	}
 	
 	public void setTagService(TagService tagService) {
@@ -107,8 +105,5 @@ public class TagController extends HttpServlet {
 	public void setTag(Tag tag) {
 		this.tag = tag;
 	}
-
-
-	
 	
 }

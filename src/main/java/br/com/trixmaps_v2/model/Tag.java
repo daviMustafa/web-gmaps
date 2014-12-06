@@ -10,10 +10,13 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.stereotype.Component;
+
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name="tag")
+@Component
 public class Tag extends AbstractEntity{
 	
 	

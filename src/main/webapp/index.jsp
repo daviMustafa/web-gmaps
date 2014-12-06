@@ -23,8 +23,9 @@
 <!-- Dialog Tag  -->	
 <link rel="stylesheet" href="${contextPath}/resources/css/dialog_box_addTag.css" type="text/css" />	
 <script src="${contextPath}/resources/js/dialog_box_addTag.js" type="text/javascript"></script>
-
 <!-- Dialog Tag -->
+
+<script src="${contextPath}/resources/js/geocodeAjax.js" type="text/javascript"></script>
 	
 <script src="${contextPath}/resources/js/menu.js"></script>
 
@@ -51,7 +52,7 @@
 				<li class='has-sub'><a href='#'><span>GMaps</span></a>
 					<ul>
 						<li><a
-							href='${contextPath}/index.jsp?page=/pages/map/map.jsp'><span>Find
+							href='${contextPath}/googleMapsController'><span>Find
 									Location</span></a></li>
 					</ul></li>
 			</ul>
@@ -62,23 +63,29 @@
 		<div class="container" style="text-align: center; margin: 0px auto; height: 100%">
 
 			<c:if test="${ not empty msg}">
-				<div class="ui-widget vanish">
+				<div id="divMsg" class="ui-widget vanish">
 					<div class="ui-state-highlight ui-corner-all"
 						style="padding: 0 .7em;">
 						<p>
-							<span class="ui-icon ui-icon-info"></span> <strong
-								id="msgSucesso">Sucesso: </strong> ${msg}
+							<span class="ui-icon ui-icon-info"></span> 
+							<strong id="msgSucesso">Sucesso: </strong> ${msg}
+							<script type="text/javascript">
+								$('#divMsg').fadeOut(3000);
+							</script>
 						</p>
 					</div>
 				</div>
 			</c:if>
 
 			<c:if test="${ not empty errorMsg}">
-				<div class="ui-widget vanish">
+				<div id="divErroMsg" class="ui-widget vanish">
 					<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">
 						<p>
-							<span class="ui-icon ui-icon-info"></span> <strong id="msgErro">Erro:
-							</strong> ${errorMsg}
+							<span class="ui-icon ui-icon-info"></span> 
+							<strong id="msgErro">Erro: </strong> ${errorMsg}
+							<script type="text/javascript">
+								$('#divErroMsg').fadeOut(3000);
+							</script>
 						</p>
 					</div>
 				</div>

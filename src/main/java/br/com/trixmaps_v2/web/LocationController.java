@@ -84,13 +84,11 @@ public class LocationController extends HttpServlet {
 	
 	public void addLocation(HttpServletRequest request, String name, String latitude, String longitude, String[] tagsSelecionadas){
 		
-		location = new Location();
-		
 		List<Tag> tags = new ArrayList<Tag>();
 		tag = new Tag();
 		
 		for(String str : tagsSelecionadas){
-			tag = tagService.listById(Long.parseLong(str));
+			tag = tagService.findById(Long.parseLong(str));
 			tags.add(tag);
 		}
 		
@@ -112,6 +110,7 @@ public class LocationController extends HttpServlet {
 	
 	public void deleteLocation(String id, HttpServletRequest request){
 		
+		
 		location.setId(Long.parseLong(id));
 		
 		try{
@@ -125,12 +124,11 @@ public class LocationController extends HttpServlet {
 	
 	public void prepareUpdate(HttpServletRequest request, String id){
 		
-		location = new Location();
 		location.setId(Long.parseLong(id));
 		
 		try{
 			
-			location = locationService.listById(location.getId());
+			location = locationService.findById(location.getId());
 			
 			request.setAttribute("location", location);
 			
@@ -143,13 +141,11 @@ public class LocationController extends HttpServlet {
 	
 	public void updateLocation(HttpServletRequest request, String id, String name, String latitude, String longitude, String[] tagsSelecionadas){
 		
-		location = new Location();
-		
 		List<Tag> tags = new ArrayList<Tag>();
 		tag = new Tag();
 		
 		for(String str : tagsSelecionadas){
-			tag = tagService.listById(Long.parseLong(str));
+			tag = tagService.findById(Long.parseLong(str));
 			tags.add(tag);
 		}
 		
@@ -178,6 +174,7 @@ public class LocationController extends HttpServlet {
 
 		tagService = ctx.getBean(TagService.class);
 		locationService = ctx.getBean(LocationService.class);
+		location = ctx.getBean(Location.class);
 	}
 	
 	public Location getLocation() {

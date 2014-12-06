@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <html>
 <style>
 html, body, #map-canvas {
@@ -17,44 +19,43 @@ html, body, #map-canvas {
 	border: 1px solid #999;
 }
 </style>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
-<script>
-	var geocoder;
-	var map;
-	function initialize() {
-		geocoder = new google.maps.Geocoder();
-		var latlng = new google.maps.LatLng(-34.397, 150.644);
-		var mapOptions = {
-			zoom : 8,
-			center : latlng
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+	<script type="text/javascript">
+		function executarMapa(){
+		    var map;
+		    var mapOptions = {
+		        zoom: 8,
+		 	center: new google.maps.LatLng(document.getElementById('lat').value,document.getElementById('lng').value)
+		    };
+		    map = new google.maps.Map(document.getElementById('map-canvas'),
+		    mapOptions);
+		    var marker = new google.maps.Marker({
+		      position: new google.maps.LatLng(document.getElementById('lat').value,document.getElementById('lng').value),
+		      map: map,
+		      title: document.getElementById("name").value
+		     });
 		}
-		map = new google.maps.Map(document.getElementById('map-canvas'),
-				mapOptions);
-	}
-
-	function codeAddress() {
-		var address = document.getElementById('address').value;
-		geocoder.geocode({
-			'address' : address
-		}, function(results, status) {
-			if (status == google.maps.GeocoderStatus.OK) {
-				map.setCenter(results[0].geometry.location);
-				var marker = new google.maps.Marker({
-					map : map,
-					position : results[0].geometry.location
-				});
-			} else {
-				alert('Geocode was not successful for the following reason: '
-						+ status);
-			}
-		});
-	}
-
-	google.maps.event.addDomListener(window, 'load', initialize);
-</script>
+	</script>
+<form id="geomap">
+	
+	<div id="geoValues">
+	
+	</div>
+	
 	<div id="panel" style="margin-top: 80px">
-		<input id="address" type="textbox" value="Sydney, NSW"> 
-		<input type="button" value="Geocode" onclick="codeAddress()">
+		<label>Choose one Location: </label>
+		<div id="comboLocations">  
+    		<select id="locationId" name="locationSelected" style="width:263px;">  
+        		<option value="0">Select one location</option>  
+            	<c:forEach var="loc" items="${listLocations}">  
+                	<option value="${loc.id}"> ${loc.name}</option>  
+            	</c:forEach>  
+    		</select>               
+	</div>
+		<button id="geocode" name="geocode">GeoCode</button>
 	</div>
 	<div id="map-canvas" style="height: 500px;margin-top: 120px"></div>
+</form>
+
+	
 </html>

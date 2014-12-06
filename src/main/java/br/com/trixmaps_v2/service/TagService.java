@@ -36,7 +36,7 @@ public class TagService {
 	}
 	
 	@Transactional
-	public Tag listById(Long id){
+	public Tag findById(Long id){
 		return tagDao.searchById(id);
 	}
 	

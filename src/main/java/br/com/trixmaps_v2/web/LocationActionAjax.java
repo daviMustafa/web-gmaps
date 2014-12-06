@@ -115,7 +115,7 @@ public class LocationActionAjax extends HttpServlet {
 	}
 	
 	/**
-	 * Fazer carregamento de Tags associadas a uma location
+	 * Fazer carregamento de Tags associadas a uma Location
 	 */
 	private JSONArray loadLocationTags(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException{ 
@@ -126,7 +126,7 @@ public class LocationActionAjax extends HttpServlet {
 		
 		if(locationId != null){
 			try{
-				Location location = locationService.listById(Long.parseLong(locationId));
+				Location location = locationService.findById(Long.parseLong(locationId));
 				JSONObject obj = null;
 				jsn = new JSONArray();
 				

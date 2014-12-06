@@ -37,7 +37,7 @@ public class LocationService {
 	}
 	
 	@Transactional
-	public Location listById(Long id){
+	public Location findById(Long id){
 		return locationDao.searchById(id);
 	}
 }

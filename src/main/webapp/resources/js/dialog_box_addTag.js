@@ -1,6 +1,57 @@
 $(function() {
 	var 
       dialog = undefined;
+	
+    $( "#showBoxAddTag" ).button().on( "click", function(source) {
+    	loadData(function (data) {
+        	console.log(data);
+        });
+    	source.preventDefault();
+    	dialog.dialog( "open" );
+    });
+    
+    /*Configuração da Caixa de Diálogo (Dialog)*/
+    dialog = $( "#dialog-form-tag" ).dialog({
+      resizable: false,
+      autoOpen: false,
+      height: 480,
+      width: 550,
+      modal: true,
+      buttons: {
+      "Associar Tag": addLocationTags,
+      "Cancelar": function() {
+    	  $( "#tags-sortable1" ).append( $( "#tags-sortable3 li" ));
+    	  	dialog.dialog( "close" );
+        }
+      },
+      close: function() {
+    	$( "#tags-sortable1" ).append( $( "#tags-sortable3 li" ));
+    		dialog.dialog( "close" );
+      }
+     });
+    
+    // Função para carregamento das Tags
+    function loadData(callbackhandler) {
+        $.ajax({
+        	url: "/trixmaps_v2/locationActionAjax?method=loadTags",
+        	type: "POST",
+        	data: {locationId : $("#locationId").val()},
+        	success : function(data){
+        		var allTags = data['allTags'];
+        		var locationTags = data['locationTags'];
+
+        		if(locationTags != undefined){
+        			removeDuplication(allTags, locationTags);
+        		}
+
+        		addItensTo(allTags, "#tags-sortable1", "ui-state-highlight");
+        		addItensTo(locationTags, "#tags-sortable3", "ui-state-default");
+			
+        	},
+        	async: true
+        });
+    }
+    
     
     function addLocationTags() {
       /*Chamada e tratamento da resposta do envio do POST ao servidor*/
@@ -34,48 +85,6 @@ $(function() {
       return tags;
     }
 
-    /*Configuração da Caixa de Diálogo (Dialog)*/
-    dialog = $( "#dialog-form-tag" ).dialog({
-      resizable: false,
-      autoOpen: false,
-      height: 480,
-      width: 550,
-      modal: true,
-      buttons: {
-      "Associar Tag": addLocationTags,
-      "Cancelar": function() {
-    	  $( "#tags-sortable1" ).append( $( "#tags-sortable3 li" ));
-    	  	dialog.dialog( "close" );
-        }
-      },
-      close: function() {
-    	$( "#tags-sortable1" ).append( $( "#tags-sortable3 li" ));
-    		dialog.dialog( "close" );
-      }
-     });
-
-    // Função para carregamento das Tags
-    function loadData(callbackhandler) {
-        $.ajax({
-        	url: "/trixmaps_v2/locationActionAjax?method=loadTags",
-        	type: "POST",
-        	data: {locationId : $("#locationId").val()},
-        	success : function(data){
-        		var allTags = data['allTags'];
-        		var locationTags = data['locationTags'];
-
-        		if(locationTags != undefined){
-        			removeDuplication(allTags, locationTags);
-        		}
-
-        		addItensTo(allTags, "#tags-sortable1", "ui-state-highlight");
-        		addItensTo(locationTags, "#tags-sortable3", "ui-state-default");
-			
-        	},
-        	async: true
-        });
-    }
-    
     function removeDuplication(allArray, usrArray) {
 	  var allTags = allArray;
   	  var myTags = usrArray;
@@ -111,14 +120,6 @@ $(function() {
 		$(UIComponent).html(strItens);
     }
     
-    $( "#showBoxAddTag" ).button().on( "click", function(source) {
-    	loadData(function (data) {
-        	console.log(data);
-        });
-    	source.preventDefault();
-    	dialog.dialog( "open" );
-    });
-    
   $("#addAllTags").click(function() {
     $( "#tags-sortable3" ).append( $( "#tags-sortable1 li" ));
   });
@@ -137,21 +138,5 @@ $(function() {
   });
  
   $( "#tags-sortable1, #sortable2, #tags-sortable3" ).disableSelection();
-  
-  function removeAreaDuplication() {
-	  var allAreas = $( "#tags-sortable1 li" );
-	  var myAreas = $( "#tags-sortable3 li" );
-	  var id = undefined;
-	  for (var i=0; i<allAreas.length; i++) {
-		  var removed = false;
-		  id = allAreas[i].value;
-		  for (var j=0; j<myAreas.length && !removed; j++) {
-			  if (id == myAreas[j].value) {
-				  $(allAreas[i]).remove();
-				  removed = true;
-			  }
-		  }
-	  }
-  }
   
 });
