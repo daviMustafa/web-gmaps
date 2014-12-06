@@ -24,7 +24,7 @@ html, body, #map-canvas {
 		function executarMapa(){
 		    var map;
 		    var mapOptions = {
-		        zoom: 8,
+		        zoom: 14,
 		 	center: new google.maps.LatLng(document.getElementById('lat').value,document.getElementById('lng').value)
 		    };
 		    map = new google.maps.Map(document.getElementById('map-canvas'),

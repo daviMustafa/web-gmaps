@@ -4,6 +4,7 @@ $(function(){
 		loadMap(function(data){
 			console.log(data);
 		})
+		source.preventDefault();
 	});
 	
 	function loadMap(callbackhandler){
@@ -21,15 +22,17 @@ $(function(){
 				var inputLong ="";
 				var inputLatlng = "";
 				
-				inputName   = $('<input>', {value: name, name:'name', type:'hidden'});
-				inputLat    = $('<input>', {value: lat, name:'lat', type:'hidden'});
-				inputLong   = $('<input>', {value: lng, name:'lng', type:'hidden'});
-				inputLatLng = $('<input>', {value: latlng, name:'latlng', type:'hidden'});
+				$('#geoValues').empty();
+				
+				inputName   = $('<input>', {id:'name',   value: name, name:'name', type:'hidden'});
+				inputLat    = $('<input>', {id:'lat',    value: lat, name:'lat', type:'hidden'});
+				inputLong   = $('<input>', {id:'lng',     value: lng, name:'lng', type:'hidden'});
+				inputLatLng = $('<input>', {id:'latlng', value: latlng, name:'latlng', type:'hidden'});
 				
 				inputName.appendTo( "#geoValues" );
 				inputLat.appendTo( "#geoValues" );
 				inputLong.appendTo( "#geoValues" );
-				console.log(inputName, inputLat, inputLong);
+				executarMapa();
 				
 			},
 			async: true
