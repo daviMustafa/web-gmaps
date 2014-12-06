@@ -43,21 +43,18 @@ public class LocationActionAjax extends HttpServlet {
 		
 		String method = request.getParameter("method");
 		
-		// Carregando contexto Spring		
-		if(ctx == null){
-			ctx = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
-		}
-				
+		loadApplicationContext();
+		
 		tagService = ctx.getBean(TagService.class);
 		locationService = ctx.getBean(LocationService.class);
 		
 		if(method != null){
 			
 			switch(method.toLowerCase()){
-			case "loadtags":{
-				loadTags(request, response);
-				break;
-			}
+				case "loadtags":{
+					loadTags(request, response);
+					break;
+				}
 			}
 		}
 	}
@@ -146,6 +143,7 @@ public class LocationActionAjax extends HttpServlet {
 		
 		return jsn;
 	}
+	
 	public void setTagService(TagService tagService) {
 		this.tagService = tagService;
 	}
@@ -154,5 +152,15 @@ public class LocationActionAjax extends HttpServlet {
 		this.locationService = locationService;
 	}
 	
+	public void loadApplicationContext(){
+		
+		// Carregando contexto Spring		
+		if (ctx == null) {
+			ctx = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
+		}
+
+		tagService = ctx.getBean(TagService.class);
+		locationService = ctx.getBean(LocationService.class);
+	}
 	
 }

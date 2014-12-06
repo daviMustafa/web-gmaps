@@ -1,4 +1,4 @@
-<!-- Inicio do Box Area-->
+<!-- Inicio do Box Tag-->
 <body class="create_tag_body">
 <div id="dialog-form-tag" title="Associação de Tags da Location">
   <p class="validateTips"></p>
@@ -31,7 +31,7 @@
 					<li></li>
 					<li></li>
 					<li style="width: 0px; margin: 0px auto; padding: 0px;">
-						<button type="button" name="removeAllArea" id="removeAllTags">&lt;&lt;</button>
+						<button type="button" name="removeAllTags" id="removeAllTags">&lt;&lt;</button>
 					</li>
 					<li></li>
 				</ul>

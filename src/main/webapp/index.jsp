@@ -91,7 +91,6 @@
 				</div>
 			</c:if>
 
-
 			<c:choose>
 				<c:when test="${not empty pages}">
 					<jsp:include page="${pages}" flush="true" />

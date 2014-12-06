@@ -47,10 +47,10 @@ public class GoogleMapsServlet extends HttpServlet {
 			String locationId = request.getParameter("locationId");
 			
 			switch(action.toLowerCase()){
-			case "loadmap":{
-				loadMap(request, response, locationId);
-				break;
-			}
+				case "loadmap":{
+					loadMap(request, response, locationId);
+					break;
+				}
 			}
 		}
 		

@@ -21,7 +21,7 @@ public class TagController extends HttpServlet {
 
 	private static final long serialVersionUID = -2321176125377083325L;
 	
-	ApplicationContext ctx = null; 
+	private ApplicationContext ctx = null; 
 	
 	private Tag tag;
 	private TagService tagService;
