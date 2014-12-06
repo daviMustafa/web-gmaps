@@ -26,10 +26,10 @@ Informação adicional
 
 Tecnologias Usadas
 ==============
-1. Serviços REST
-2. Hibernate 4.x
-3. Spring 4.x
-4. Bootstrap (para testes de responsividade do site)
-5. AJAX
-6. JSON
+
+1. Hibernate 4.x
+2. Spring 4.x
+3. Bootstrap (para testes de responsividade do site)
+4. AJAX
+5. JSON
 
