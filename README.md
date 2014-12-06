@@ -31,4 +31,5 @@ Tecnologias Usadas
 3. Spring 4.x
 4. Bootstrap (para testes de responsividade do site)
 5. AJAX
+6. JSON
 
