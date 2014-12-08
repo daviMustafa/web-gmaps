@@ -32,4 +32,5 @@ Tecnologias Usadas
 3. Bootstrap (para testes de responsividade do site)
 4. AJAX
 5. JSON
+6. REST Services
 
