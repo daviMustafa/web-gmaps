@@ -131,11 +131,11 @@
 					<c:choose>
 						<c:when test="${location.id ne null}">
 							<input type="submit" value="Update"/>
-							<input type="hidden" name="action" value="update"/>
+							<input type="hidden" name="action" value="UpdateLocation"/>
 						</c:when>
 						<c:otherwise>
 							<input type="submit" value="Save"/>
-							<input type="hidden" name="action" value="create"/>
+							<input type="hidden" name="action" value="CreateLocation"/>
 						</c:otherwise>
 					</c:choose>
 					</td>
@@ -182,12 +182,12 @@
 								<td style="text-align: center"><fmt:formatDate value="${location.created}" pattern="dd/MM/yyyy"/> </td>
 								
 								<td style="text-align: center">
-									<button title="Delete" id="del" value="del" type="button" onclick="submitId(${location.id}, document.getElementById('del').value);">
+									<button title="Delete" id="del" value="DeleteLocation" type="button" onclick="submitId(${location.id}, document.getElementById('del').value);">
 										<img src="resources/img/delete.png" width="15px" height="15px"/>
 									</button>
 								</td>
 								<td style="text-align: center">
-									<button title="Edit" id="edit" value="edit" type="button" onclick="submitId(${location.id}, document.getElementById('edit').value);">
+									<button title="Edit" id="edit" value="PrepareUpdateLocation" type="button" onclick="submitId(${location.id}, document.getElementById('edit').value);">
 										<img src="resources/img/edit.png" width="15px" height="15px"
 									</button>
 								</td>

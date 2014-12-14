@@ -18,8 +18,8 @@ $(function() {
       width: 550,
       modal: true,
       buttons: {
-      "Associar Tag": addLocationTags,
-      "Cancelar": function() {
+      "Associate Tag": addLocationTags,
+      "Cancel": function() {
     	  $( "#tags-sortable1" ).append( $( "#tags-sortable3 li" ));
     	  	dialog.dialog( "close" );
         }
@@ -34,7 +34,7 @@ $(function() {
     function loadData(callbackhandler) {
         $.ajax({
         	url: "/trixmaps_v2/locationActionAjax?method=loadTags",
-        	type: "POST",
+        	type: "GET",
         	data: {locationId : $("#locationId").val()},
         	success : function(data){
         		var allTags = data['allTags'];

@@ -9,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -20,80 +23,93 @@ import br.com.trixmaps_v2.service.TagService;
 public class TagController extends HttpServlet {
 
 	private static final long serialVersionUID = -2321176125377083325L;
-	
-	private ApplicationContext ctx = null; 
-	
+
+	private ApplicationContext ctx = null;
+
 	private Tag tag;
 	private TagService tagService;
-	
+
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException{
+	@GET
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
-	
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+	@DELETE
+	protected void doDelete(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+
+		String id = request.getParameter("id");
+
+		deleteTag(id, request);
 		
-		String action = request.getParameter("action");
-		
-		loadApplicationContext();
-		
-		if("".equalsIgnoreCase(action) || action != null){
-			if("create".equalsIgnoreCase(action)){
-				
-				String name = request.getParameter("name");
-				addTag(name, request);
-			
-			} else if ("delete".equalsIgnoreCase(action)){
-				
-				String id = request.getParameter("id");
-				deleteTag(id, request);
-			}
-		}	
+		Integer status = (Integer) request.getAttribute("status");
+		response.setStatus(status);
 		
 		request.setAttribute("tags", tagService.list());
-		RequestDispatcher rd = request.getRequestDispatcher("index.jsp?page=/pages/tag/create.jsp");
+		
+	}
+
+	@Override
+	@POST
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+
+		loadApplicationContext();
+		String method = request.getParameter("save");
+		
+		if("create".equalsIgnoreCase(method)){
+			String name = request.getParameter("name");
+			addTag(name, request);
+		}
+			
+		request.setAttribute("tags", tagService.list());
+		RequestDispatcher rd = request
+				.getRequestDispatcher("index.jsp?page=/pages/tag/create.jsp");
 		rd.forward(request, response);
 	}
-	
-	public void addTag(String name, HttpServletRequest request){
-		
+
+	public void addTag(String name, HttpServletRequest request) {
+
 		tag.setName(name);
 		tag.setCreated(new Date());
-		
-		try{
+
+		try {
 			tagService.create(tag);
 			request.setAttribute("msg", "Tag successfully added.");
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("errorMsg", "Error trying to add tag.");
 		}
 	}
-	
-	public void deleteTag(String id, HttpServletRequest request){
-		
+
+	public void deleteTag(String id, HttpServletRequest request) {
+
 		tag.setId(Long.parseLong(id));
-		
-		try{
+
+		try {
 			tagService.delete(tag);
 			request.setAttribute("msg", "Tag successfully deleted.");
-		} catch(Exception e){
+			request.setAttribute("status", 200);
+		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("errorMsg", "Error trying to delete tag.");
+			request.setAttribute("status", 406);
 		}
 	}
-	
-	public void loadApplicationContext(){
-		// Carregando contexto Spring		
-		if(ctx == null){
-			ctx = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
+
+	public void loadApplicationContext() {
+		// Carregando contexto Spring
+		if (ctx == null) {
+			ctx = WebApplicationContextUtils.getWebApplicationContext(this
+					.getServletContext());
 		}
-			
+
 		tagService = ctx.getBean(TagService.class);
 		tag = ctx.getBean(Tag.class);
 	}
-	
+
 	public void setTagService(TagService tagService) {
 		this.tagService = tagService;
 	}
@@ -105,5 +121,5 @@ public class TagController extends HttpServlet {
 	public void setTag(Tag tag) {
 		this.tag = tag;
 	}
-	
+
 }

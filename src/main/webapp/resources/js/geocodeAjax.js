@@ -10,7 +10,7 @@ $(function(){
 	function loadMap(callbackhandler){
 		$.ajax({
 			url : "/trixmaps_v2/googleMapsController?method=loadMap",
-			type : "POST",
+			type : "GET",
 			data: {locationId : $("#locationId").val()},
 			success : function(data){
 				var lng = data['longitude'];

@@ -20,17 +20,7 @@
 <script src="${contextPath}/resources/js/jquery-ui.js"    type="text/javascript"></script>
 <script src="${contextPath}/resources/js/jquery.validate.min.js" type="text/javascript"></script>
 	
-<!-- Dialog Tag  -->	
-<link rel="stylesheet" href="${contextPath}/resources/css/dialog_box_addTag.css" type="text/css" />	
-<script src="${contextPath}/resources/js/dialog_box_addTag.js" type="text/javascript"></script>
-<!-- Dialog Tag -->
-
-<script src="${contextPath}/resources/js/geocodeAjax.js" type="text/javascript"></script>
-	
 <script src="${contextPath}/resources/js/menu.js"></script>
-
-
-
 
 <title>Index Trixmaps_V2</title>
 </head>
@@ -105,4 +95,11 @@
 			<c:import url="footer.jsp" />
 		</div>
 </body>
+<script src="${contextPath}/resources/js/deleteTagAjax.js" type="text/javascript"></script>
+<!-- Dialog Tag  -->	
+<link rel="stylesheet" href="${contextPath}/resources/css/dialog_box_addTag.css" type="text/css" />	
+<script src="${contextPath}/resources/js/dialog_box_addTag.js" type="text/javascript"></script>
+<!-- Dialog Tag -->
+
+<script src="${contextPath}/resources/js/geocodeAjax.js" type="text/javascript"></script>
 </html>

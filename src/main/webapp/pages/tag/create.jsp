@@ -28,8 +28,7 @@
 
 	});
 	function submitId(id){
-		$("#id").val(id);
-		$("#form_tag_list").submit();
+		$("#idTag").val(id);
 	}
 </script>
 <div style="text-align: center">
@@ -39,13 +38,12 @@
 	<form id="form_tag" action="tagController" method="post">
 		<label>Name: </label> <input type="text" name="name" /></br>
 		<label for="name" style="color: red"></label> 
-		<input type="hidden" value="create" name="action" /> 
+		<input type="hidden" value="create" name="save"/>
 		<input type="submit" value="Save" />
 		<input type="reset" value="Reset" /> </br>
 	</form>
 
-	<form id="form_tag_list" action="tagController" method="post">
-		<input type="hidden" value="" name="id" id="id"/>
+		<input type="hidden" value="" name="id" id="idTag"/>
 			
 		<c:if test="${not empty tags }">
 			<table  style="margin: 0px auto; margin-top: 50px" id="tablelist">
@@ -55,23 +53,23 @@
 					<td style="width: 100px; text-align: center">Created</td>
 					<td style="width: 40px; text-align: center">Delete</td>
 				</thead>
-				<c:forEach var="tag" items="${tags}">
-					<tr>
-						<td style="text-align: center"><c:out value="${tag.id}"/></td>
-						<td style="text-align: center"><c:out value="${tag.name}" /></td>
-						<td style="text-align: center"><fmt:formatDate value="${tag.created}" pattern="dd/MM/yyyy"/></td>
-						<td style="text-align: center">
-							<div>
-								<button title="Delete" value="delete" name="action" type="button" onclick="submitId(${tag.id})">
-									<img src="resources/img/delete.png" width="15px" height="15px"/>
-								</button>
-								<input type="hidden" value="delete" name="action" />
-							</div>
-						</td>
-					</tr>
-				</c:forEach>
+				<div id="divResult">
+					<c:forEach var="tag" items="${tags}">
+						<tr id="${tag.id}">
+							<td style="text-align: center"><c:out value="${tag.id}"/></td>
+							<td style="text-align: center"><c:out value="${tag.name}" /></td>
+							<td style="text-align: center"><fmt:formatDate value="${tag.created}" pattern="dd/MM/yyyy"/></td>
+							<td style="text-align: center">
+								<div>
+									<button title="Delete" class="delTag" onclick="submitId(${tag.id})">
+										<img src="resources/img/delete.png" width="15px" height="15px"/>
+									</button>
+								</div>
+							</td>
+						</tr>
+					</c:forEach>
+				</div>
 			</table>
 		</c:if>
-	</form>
 </div>
 </html>

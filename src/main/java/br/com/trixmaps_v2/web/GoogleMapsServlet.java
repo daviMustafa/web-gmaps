@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.GET;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,13 +30,8 @@ public class GoogleMapsServlet extends HttpServlet {
 	private Location location;
 	
 	@Override
+	@GET
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doPost(request, response);
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 		loadApplicationContext();
@@ -61,9 +57,8 @@ public class GoogleMapsServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("index.jsp?page=/pages/map/map.jsp");
 			rd.forward(request, response);
 		}	
-		
 	}
-	
+
 	private void loadMap(HttpServletRequest request, HttpServletResponse response, String locationId){
 		
 		JSONObject obj = null;

@@ -9,6 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,12 +35,14 @@ public class LocationActionAjax extends HttpServlet {
 	private LocationService locationService;
 	
 	@Override
+	@GET
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		doPost(req, resp);
 	}
 
 	@Override
+	@POST
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
 		String method = request.getParameter("method");
