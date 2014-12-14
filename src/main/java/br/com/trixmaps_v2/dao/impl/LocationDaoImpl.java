@@ -45,7 +45,8 @@ public class LocationDaoImpl implements LocationDao, Serializable{
 	
 	@Transactional
 	public void remove(Location location){
-		this.manager.remove(manager.merge(location));
+		location = manager.find(Location.class, location.getId());
+		this.manager.remove(location);
 	}
 	
 	@Transactional

@@ -42,12 +42,19 @@ public class TagController extends HttpServlet {
 
 		String id = request.getParameter("id");
 
-		deleteTag(id, request);
-		
-		Integer status = (Integer) request.getAttribute("status");
-		response.setStatus(status);
+		tag.setId(Long.parseLong(id));
+
+		try {
+			tagService.delete(tag);
+			request.setAttribute("msg", "Tag successfully deleted.");
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("errorMsg", "Error trying to delete tag.");
+		}
 		
 		request.setAttribute("tags", tagService.list());
+		RequestDispatcher rd = request.getRequestDispatcher("index.jsp?page=/pages/tag/create.jsp");
+		rd.forward(request, response);
 		
 	}
 
@@ -65,8 +72,7 @@ public class TagController extends HttpServlet {
 		}
 			
 		request.setAttribute("tags", tagService.list());
-		RequestDispatcher rd = request
-				.getRequestDispatcher("index.jsp?page=/pages/tag/create.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("index.jsp?page=/pages/tag/create.jsp");
 		rd.forward(request, response);
 	}
 
@@ -81,21 +87,6 @@ public class TagController extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("errorMsg", "Error trying to add tag.");
-		}
-	}
-
-	public void deleteTag(String id, HttpServletRequest request) {
-
-		tag.setId(Long.parseLong(id));
-
-		try {
-			tagService.delete(tag);
-			request.setAttribute("msg", "Tag successfully deleted.");
-			request.setAttribute("status", 200);
-		} catch (Exception e) {
-			e.printStackTrace();
-			request.setAttribute("errorMsg", "Error trying to delete tag.");
-			request.setAttribute("status", 406);
 		}
 	}
 

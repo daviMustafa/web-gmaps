@@ -43,7 +43,8 @@ public class TagDaoImpl implements TagDao, Serializable{
 	
 	@Transactional
 	public void remove(Tag tag){
-		this.manager.remove(manager.merge(tag));
+		tag = manager.find(Tag.class, tag.getId());
+		this.manager.remove(tag);
 	}
 	
 	@Transactional
