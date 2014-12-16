@@ -39,27 +39,34 @@ public class CreateLocation implements Logic {
 		String longitude = request.getParameter("longitude");
 		String[] tagsSelecionadas = request.getParameterValues("tagsSelecionadas");
 		
-		List<Tag> tags = new ArrayList<Tag>();
-		tag = new Tag();
 		
-		for(String str : tagsSelecionadas){
-			tag = tagService.findById(Long.parseLong(str));
-			tags.add(tag);
+		if(tagsSelecionadas != null){
+			List<Tag> tags = new ArrayList<Tag>();
+			tag = new Tag();
+			
+			for(String str : tagsSelecionadas){
+				tag = tagService.findById(Long.parseLong(str));
+				tags.add(tag);
+			}
+			
+			location.setName(name);
+			location.setLatitude(Double.parseDouble(latitude));
+			location.setLongitude(Double.parseDouble(longitude));
+			location.setTags(tags);
+			location.setCreated(new Date());
+			
+			try{
+				locationService.create(location);
+				request.setAttribute("msg", "Location successfully added.");
+			} catch (Exception e){
+				e.printStackTrace();
+				request.setAttribute("errorMsg", "Error trying to add location.");
+			}
+		} else {
+			request.setAttribute("errorMsg", "You need to associate tags to create a location.");
 		}
 		
-		location.setName(name);
-		location.setLatitude(Double.parseDouble(latitude));
-		location.setLongitude(Double.parseDouble(longitude));
-		location.setTags(tags);
-		location.setCreated(new Date());
 		
-		try{
-			locationService.create(location);
-			request.setAttribute("msg", "Location successfully added.");
-		} catch (Exception e){
-			e.printStackTrace();
-			request.setAttribute("errorMsg", "Error trying to add location.");
-		}
 		
 	}
 }
