@@ -188,7 +188,7 @@
 								</td>
 								<td style="text-align: center">
 									<button title="Edit" id="edit" value="PrepareUpdateLocation" type="button" onclick="submitId(${location.id}, document.getElementById('edit').value);">
-										<img src="resources/img/edit.png" width="15px" height="15px"
+										<img src="resources/img/edit.png" width="15px" height="15px"/>
 									</button>
 								</td>
 							</tr>
