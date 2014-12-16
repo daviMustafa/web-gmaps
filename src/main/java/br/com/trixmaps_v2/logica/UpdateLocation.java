@@ -32,19 +32,25 @@ public class UpdateLocation implements Logic {
 		tag = ctx.getBean(Tag.class);
 		locationService = ctx.getBean(LocationService.class);
 		tagService = ctx.getBean(TagService.class);
+		List<Tag> tags = new ArrayList<Tag>();
 		
 		String id = request.getParameter("locationId");
 		String name = request.getParameter("name");
 		String latitude = request.getParameter("latitude");
 		String longitude = request.getParameter("longitude");
 		String[] tagsSelecionadas = request.getParameterValues("tagsSelecionadas");
+
+		if(tagsSelecionadas == null){
+			location = locationService.findById(Long.parseLong(id));
+			tags = location.getTags();
+		} else {
 		
-		List<Tag> tags = new ArrayList<Tag>();
-		tag = new Tag();
+			tag = new Tag();
 		
-		for(String str : tagsSelecionadas){
-			tag = tagService.findById(Long.parseLong(str));
-			tags.add(tag);
+			for(String str : tagsSelecionadas){
+				tag = tagService.findById(Long.parseLong(str));
+				tags.add(tag);
+			}	
 		}
 		
 		location.setId(Long.parseLong(id));
