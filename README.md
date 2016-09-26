@@ -1,4 +1,4 @@
-GMaps Web Service Project
+GMaps Web Project
 ======================
 
 Uma aplicação feita para estudo visando aprender como funciona a API do GoogleMaps.
